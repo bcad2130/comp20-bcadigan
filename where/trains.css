@@ -1,1 +1,14 @@
-p
+html {
+	height: 100%;
+}
+	
+body { 
+	height: 95%;
+	margin: 10px;
+	border-style: ridge;
+	border-color: red;
+}
+
+#map_canvas { 
+	height: 100%; 
+}
