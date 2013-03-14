@@ -64,7 +64,7 @@
 		};
 		deathimage = new Image();
 		deathimage.src = "assets/dead_frog.png";
-			//if canvas is supported
+		//if canvas is supported
 		if (canvas.getContext){
 			ctx = canvas.getContext('2d');
 			img = new Image();
@@ -155,13 +155,6 @@
 			ctx.fillStyle="#00FF00";
 			ctx.fillText("GAME OVER", 140,300);
 		}
-		/*} else if(game_won == true){
-			//win text
-			level_up();
-			ctx.font="24px sans-serif"; 
-			ctx.fillStyle="#00FF00";
-			ctx.fillText("YOU WIN", 140,300);
-		}*/
 	}
 	
 	function collisionChecker(){
@@ -210,12 +203,10 @@
 			death = true;
 		frog_x += frog_speed;
 		if(frog_x > east_bound || frog_x < west_bound){
-			//console.log(frog_x);
 			death = true;
 		}
 		frog_speed = 0;
 		if(death){
-			//alert("DEATH!");
 			time = 220;
 			death_time = 20;
 			drawdeath = "true";
@@ -229,7 +220,6 @@
 		}
 		if(lives == 0){
 			game_over = true;
-			//alert("Game Over!");
 		}
 		for(var i=0;i<3;i++)
 			longlogs[i].xcoord+=longlogs[i].speed;
@@ -336,12 +326,7 @@
 		}
 	}
 	
-function draw(){
-		//image.id = "sprites";
-//		img = new Image();
-	//	img.src = "assets/frogger_sprites.png";
-		//img.onload = function(){
-
+		function draw(){
 			//water
 			ctx.fillStyle = "#191970";
 			ctx.fillRect (0, 0, 400, 290);
@@ -435,21 +420,17 @@ function draw(){
 			}
 			//starting frog
 			ctx.drawImage(img,crop_frog_x,crop_frog_y,frog_width,frog_height,frog_x,frog_y,frog_width,frog_height);
-}
+		}
 
 function winner(winning_pad){
 	score += 50;
 	score+= Math.floor((time/12)*10);
 	lilies[winning_pad].occupied = true;
 	pads_won++;
-	//won_pads[won_pads.length] = winning_pad;
-	//console.log("wins!");
 	max_y = south_bound;
 	time = 220;
 	if(pads_won == 5){
-	//won_pads.length ==5){
 		score += 1000;
-		//game_won = true;
 		level_up()
 	}
 	frog_x = frog_x_start;
@@ -461,27 +442,27 @@ function level_up(){
 	for(var i=0; i<4; i++){
 		medlogs[i].speed++;
 	}
-		for(var i=0; i<5; i++){
-			for(var j=0; j<2; j++){		
-				turtles1[i][j].speed--;
-			}
+	for(var i=0; i<5; i++){
+		for(var j=0; j<2; j++){		
+			turtles1[i][j].speed--;
 		}
-		for(var i=0; i<5; i++){
-			for(var j=0; j<3; j++){		
-				turtles2[i][j].speed--;
-			}
+	}
+	for(var i=0; i<5; i++){
+		for(var j=0; j<3; j++){		
+			turtles2[i][j].speed--;
 		}
-		for(var i=0; i<2; i++){
-			trucks[i].speed--;
-		}		
-		for(var i=0; i<3; i++){
-			longlogs[i].speed++;
-			shortlogs[i].speed++;
-			whicars[i].speed++;
-			tractors[i].speed++;
-			yellcars[i].speed--;
-			purpcars[i].speed--;
-		}
+	}
+	for(var i=0; i<2; i++){
+		trucks[i].speed--;
+	}		
+	for(var i=0; i<3; i++){
+		longlogs[i].speed++;
+		shortlogs[i].speed++;
+		whicars[i].speed++;
+		tractors[i].speed++;
+		yellcars[i].speed--;
+		purpcars[i].speed--;
+	}
 	for(var i=0;i<5;i++){
 		lilies[i].occupied =false;
 	}
