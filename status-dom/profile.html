@@ -8,10 +8,11 @@
 	function updateStatus()
 	{
 		var d = new Date();
-		var y = d.getMonth()+"/"+d.getDate()+"/"+d.getFullYear()+" " +d.getHours() +":"+ d.getMinutes();
+		var y = d.getMonth()+1+"/"+d.getDate()+"/"+d.getFullYear()+" " +d.getHours() +":"+ d.getMinutes();
 		
 		var message = document.getElementById("msg").value;
 		message = y+" - "+message;
+		localStorage[new Date().getTime()] = message;
 		var node=document.createElement("P");
 		var textNode=document.createTextNode(message);
 		node.appendChild(textNode);
@@ -19,10 +20,22 @@
 		var parentP = document.getElementById("status");
 		parentP.insertBefore(node, parentP.childNodes[0]);
 	}
+	function local()
+	{
+		for(key in localStorage){
+			//console.log(localStorage[key]);
+			var node=document.createElement("P");
+			var textNode=document.createTextNode(localStorage[key]);
+			node.appendChild(textNode);
+
+			var parentP = document.getElementById("status");
+			parentP.insertBefore(node, parentP.childNodes[0]);
+		}
+	}
 </script>
 </head>
 
-<body>
+<body onload= "local()">
 	<h1>Fecebook</h1>
 	<div id="nav">
 		<ul>
