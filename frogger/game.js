@@ -425,31 +425,31 @@
 			ctx.drawImage(img,crop_frog_x,crop_frog_y,frog_width,frog_height,frog_x,frog_y,frog_width,frog_height);
 		}
 
-function winner(winning_pad){
-	score += 50;
-	score+= Math.floor((time/12)*10);
-	lilies[winning_pad].occupied = true;
-	pads_won++;
-	max_y = south_bound;
-	time = 220;
-	if(pads_won == 5){
-		score += 1000;
-		level_up()
-	}
-	frog_x = frog_x_start;
-	frog_y = frog_y_start;
-}
-
-function level_up(){
-	level++;
-	for(var i=0; i<4; i++){
-		medlogs[i].speed++;
-	}
-	for(var i=0; i<5; i++){
-		for(var j=0; j<2; j++){		
-			turtles1[i][j].speed--;
+	function winner(winning_pad){
+		score += 50;
+		score+= Math.floor((time/12)*10);
+		lilies[winning_pad].occupied = true;
+		pads_won++;
+		max_y = south_bound;
+		time = 220;
+		if(pads_won == 5){
+			score += 1000;
+			level_up()
 		}
+		frog_x = frog_x_start;
+		frog_y = frog_y_start;
 	}
+
+	function level_up(){
+		level++;
+		for(var i=0; i<4; i++){
+			medlogs[i].speed++;
+		}
+		for(var i=0; i<5; i++){
+			for(var j=0; j<2; j++){		
+				turtles1[i][j].speed--;
+			}
+		}
 	for(var i=0; i<5; i++){
 		for(var j=0; j<3; j++){		
 			turtles2[i][j].speed--;
@@ -466,85 +466,85 @@ function level_up(){
 		yellcars[i].speed--;
 		purpcars[i].speed--;
 	}
-	for(var i=0;i<5;i++){
-		lilies[i].occupied =false;
+		for(var i=0;i<5;i++){
+			lilies[i].occupied =false;
+		}
+		pads_won = 0;
 	}
-	pads_won = 0;
-}
 
-function collides(b) {
-  return frog_x < b.xcoord + b.width &&
-         frog_x + frog_width > b.xcoord &&
-         frog_y < b.ycoord + b.height &&
-         frog_y + frog_height > b.ycoord;
-}
+	function collides(b) {
+	  return frog_x < b.xcoord + b.width &&
+		 frog_x + frog_width > b.xcoord &&
+		 frog_y < b.ycoord + b.height &&
+		 frog_y + frog_height > b.ycoord;
+	}
 
-function log(xcoord, ycoord, speed, width, height){
-	this.xcoord = xcoord;
-	this.ycoord = ycoord;
-	this.speed = speed;
-	this.width = width;
-	this.height = height;
-}
+	function log(xcoord, ycoord, speed, width, height){
+		this.xcoord = xcoord;
+		this.ycoord = ycoord;
+		this.speed = speed;
+		this.width = width;
+		this.height = height;
+	}
 
-function turtle(xcoord, ycoord, speed, width, height){
-	this.xcoord = xcoord;
-	this.ycoord = ycoord;
-	this.speed = speed;
-	this.width = width;
-	this.height = height;	
-}
+	function turtle(xcoord, ycoord, speed, width, height){
+		this.xcoord = xcoord;
+		this.ycoord = ycoord;
+		this.speed = speed;
+		this.width = width;
+		this.height = height;	
+	}
 
-function truck(xcoord, ycoord, speed, width, height){
-	this.xcoord = xcoord;
-	this.ycoord = ycoord;
-	this.speed = speed;
-	this.width = width;
-	this.height = height;	
-}
+	function truck(xcoord, ycoord, speed, width, height){
+		this.xcoord = xcoord;
+		this.ycoord = ycoord;
+		this.speed = speed;
+		this.width = width;
+		this.height = height;	
+	}
 
-function purple_car(xcoord, ycoord, speed, width, height){
-	this.xcoord = xcoord;
-	this.ycoord = ycoord;
-	this.speed = speed;
-	this.width = width;
-	this.height = height;	
-}
+	function purple_car(xcoord, ycoord, speed, width, height){
+		this.xcoord = xcoord;
+		this.ycoord = ycoord;
+		this.speed = speed;
+		this.width = width;
+		this.height = height;	
+	}
 
-function white_car(xcoord, ycoord, speed, width, height){
-	this.xcoord = xcoord;
-	this.ycoord = ycoord;
-	this.speed = speed;
-	this.width = width;
-	this.height = height;
-}
+	function white_car(xcoord, ycoord, speed, width, height){
+		this.xcoord = xcoord;
+		this.ycoord = ycoord;
+		this.speed = speed;
+		this.width = width;
+		this.height = height;
+	}
 
-function tractor(xcoord, ycoord, speed, width, height){
-	this.xcoord = xcoord;
-	this.ycoord = ycoord;
-	this.speed = speed;
-	this.width = width;
-	this.height = height;	
-}
-function yellow_car(xcoord, ycoord, speed, width, height){
-	this.xcoord = xcoord;
-	this.ycoord = ycoord;
-	this.speed = speed;
-	this.width = width;
-	this.height = height;	
-}
-function turtle(xcoord, ycoord, speed, width, height){
-	this.xcoord = xcoord;
-	this.ycoord = ycoord;
-	this.speed = speed;
-	this.width = width;
-	this.height = height;	
-}
-function lilypad(xcoord, ycoord, speed, width, height, occupied){
-	this.xcoord = xcoord;
-	this.ycoord = ycoord;
-	this.speed = speed;
-	this.width = width;
-	this.height = height;	
-	this.occupied = occupied;
-}
+	function tractor(xcoord, ycoord, speed, width, height){
+		this.xcoord = xcoord;
+		this.ycoord = ycoord;
+		this.speed = speed;
+		this.width = width;
+		this.height = height;	
+	}
+	function yellow_car(xcoord, ycoord, speed, width, height){
+		this.xcoord = xcoord;
+		this.ycoord = ycoord;
+		this.speed = speed;
+		this.width = width;
+		this.height = height;	
+	}
+	function turtle(xcoord, ycoord, speed, width, height){
+		this.xcoord = xcoord;
+		this.ycoord = ycoord;
+		this.speed = speed;
+		this.width = width;
+		this.height = height;	
+	}
+	function lilypad(xcoord, ycoord, speed, width, height, occupied){
+		this.xcoord = xcoord;
+		this.ycoord = ycoord;
+		this.speed = speed;
+		this.width = width;
+		this.height = height;	
+		this.occupied = occupied;
+	}
