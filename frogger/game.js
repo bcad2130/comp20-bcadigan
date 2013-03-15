@@ -49,6 +49,7 @@
 	var won_pads = new Array();
 	var pads_won = 0;
 	var time = 220;
+	var highscore;
 	
 	function start_game(){
 		gameDiv = document.getElementById('game_div');
@@ -62,6 +63,9 @@
 				return false;
 			}
 		};
+		if(typeof localStorage["high"] != "undefined" )
+			highscore = localStorage["high"];
+		else highscore = 0;	
 		deathimage = new Image();
 		deathimage.src = "assets/dead_frog.png";
 		//if canvas is supported
@@ -151,6 +155,10 @@
 			direct = "none";
 		} else if(game_over == true){
 			//lose text
+			if(typeof localStorage["high"] == "undefined" )
+				localStorage["high"] = score;
+			else if(localStorage["high"] < score)
+				localStorage["high"] = score;				
 			ctx.font="24px sans-serif"; 
 			ctx.fillStyle="#00FF00";
 			ctx.fillText("GAME OVER", 140,300);
@@ -351,7 +359,7 @@
 			ctx.fillText("Level "+level, 100,540);
 			ctx.font="16px sans-serif"; 
 			ctx.fillText("Score:"+score, 10,560);
-			ctx.fillText("Highscore:0", 190,560);
+			ctx.fillText("Highscore:"+highscore, 190,560);
 			//long logs
 			for(var i=0;i<3;i++){
 				ctx.drawImage(img,8,165,longlogs[i].width,longlogs[i].height,longlogs[i].xcoord,longlogs[i].ycoord,longlogs[i].width,longlogs[i].height);
@@ -407,11 +415,6 @@
 				ctx.drawImage(deathimage, death_x, death_y, 10*death_time, 10*death_time);
 				death_time--;
 			}
-			/*/sitting frog
-			for(var i =0;i<won_pads.length; i++){
-				if(lilies.occupied==true)
-					ctx.drawImage(img,leftdown_frog_x,updown_frog_y,frog_width,frog_height,lilies[won_pads[i]].xcoord-10,lilies[won_pads[i]].ycoord,frog_width,frog_height);
-			}*/
 			//sitting frog
 			for(var i =0;i<5; i++){
 				if(lilies[i].occupied==true){
