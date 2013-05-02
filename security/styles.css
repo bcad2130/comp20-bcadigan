@@ -1,0 +1,21 @@
+h2{
+	background-color: #91B547;
+	padding:10px;
+	border:5px groove #006600;
+	margin:0px;
+}
+
+body{
+	background-color: #0033FF;
+	font-family: "Trebuchet MS", serif;
+	color: #99FFFF;
+}
+
+h1{
+	font-size:52px;
+	margin-left:50px;
+}
+
+h3{
+	margin-left:50px;
+}

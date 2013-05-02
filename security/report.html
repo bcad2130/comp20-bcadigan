@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<link rel="stylesheet" href="styles.css">
+		<title>Security Report</title>
+	</head>
+	<body>
+		<h1>Score Center Security Report</h1>
+		<h3>By Brett Cadigan</h3>
+		<h2>Introduction</h2>
+		<p>I have been hired to test an online high score board for security flaws. 
+		This board takes in the title of the game, the user's name, the score, and the time of posting. 
+		It can then dsipaly the top scores in sorted order or high scores according to a searched username.</p>
+		<p>The long hours invested in games like Frogger necessitate a secure site, where scores will be preserved indefinitely. 
+		My job is an important one, to root out pernicious holes in the code that a hacker could exploit. 
+		My employer, Andre Mendelsohn, has spent a long time coding this and wants it to be ideal for his potential clients. 
+		His boss, CEO Ming Chow is notorious for his focus on secure web sites as he has many enemies in the Chinese Underground Hacker's Society.</p>
+		<h2>Methodology</h2>
+		<p>To test the security of this site, I will first be using black box testing to run through the site without any knowledge of the source code. 
+		I will attempt to break the site using common hacking techniques. 
+		Once these have been expended, I will move on to white box testing in which I will look at his source code in detail. 
+		I will use this information to probe his site for the weaknesses I may have passed over the first time.</p>
+		<h2>Abstract of Findings</h2>
+		<p>The problems in this site were related to who can access the data and how. 
+		It is very important to keep access to your site restricted to only those who will be responsible with the data.
+		Additionally, the way that data is given to a site must be closely monitored by the site or bad data could replace the good data.
+		Finally, if not all the data that is needed is provided, the website displays that data with a NULL (empty) value instead. The website should check before it displays such false data.</p>
+		
+		<h2>Issues Found</h2>
+		<ol>
+			<li><strong>Open Cross Origin Resource Sharing</strong></li>
+			<ul>
+				<li><em>Location: </em>web.js</li>
+				<li><em>Severity: </em>Medium -- Any malicious website could access your site's data</li>
+				<li><em>Description: </em>Under both app.post and app.get, the code allows for access from any source website with "res.header('Access-Control-Allow-Origin', '*');". 
+				This could let any site post data or access the data on the site due to the "*" indicating that any website can access.</li>
+				<li><em>Resolution: </em>The website should have the specific game site from which the scores will be posted specified rather than the universal "*".</li>
+			</ul>
+			<li><strong>Multiple Scores, Usernames, Game Titles</strong></li>
+			<ul>
+				<li><em>Location: </em>web.js</li>
+				<li><em>Severity: </em>Low -- Multiple scores might overwrite the intended score</li>
+				<li><em>Description: </em>If multiple scores (or usernames or game titles) are inserted, only the most recent of the json document will enter the collection. 
+				As such, the correct scores could be overwritten with false scores within the same post document.</li>
+				<li><em>Resolution: </em>The website should sanitize such that only the first score/username/game title inserted should be considered acceptable. All others should be voided.</li>
+			</ul>
+			<li><strong>Null Data</strong></li>
+			<ul>
+				<li><em>Location: </em>web.js</li>
+				<li><em>Severity: </em>Medium -- If the required variable has a null value, the code will not be able to properly sort or deal with it</li>
+				<li><em>Description: </em>If a data document is inserted with less than the required points of data (Game title, username, and score) 
+				then the website will still accept it, displaying a 'null' (or 'NaN' for score).</li>
+				<li><em>Resolution: </em>The website should test to make sure that all the necessary data exists before accepting any entry. 
+				If a bad entry is found, the website would request that the user reinsert the data or just not input this data into the collection.</li>
+			</ul>
+		</ol>
+		<h2>Conclusion</h2>
+		<p>This code is relatively secure. It successfully prevents payload script from being entered into the usersearch which prevents some of the largest security attacks. 
+		But it needs to be more wary of the data that it accepts. It has a danger of accepting too little or too much data, both of which could corrupt the final display of data.
+		Finally, as it stands the site can be accessed by malicious sites as the CORS will accept any site. 
+		Overall, the site is looking good and should be pretty safe from Chinese underground hackers.</p>
+	</body>
+</html>
